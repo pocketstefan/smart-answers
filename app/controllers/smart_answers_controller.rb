@@ -1,4 +1,10 @@
+require 'smart_answer/flow_registry'
+
 class SmartAnswersController < ApplicationController
+  before_action do
+    append_view_path SmartAnswer::FlowRegistry.instance.load_path
+  end
+
   include Slimmer::GovukComponents
   include Slimmer::Headers
   include EducationNavigationABTestable

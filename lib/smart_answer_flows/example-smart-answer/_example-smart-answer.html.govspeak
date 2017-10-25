@@ -1,0 +1,69 @@
+<% content_for :title do %>
+  [Smart Answer](https://github.com/alphagov/smart-answers) example
+<% end %>
+
+<% content_for :body do %>
+  This document contains formatting standards for creating readable, consistent
+  files using Markdown.
+  
+  One problem I run into constantly when creating Markdown files is that I waste
+  an ass-load of time fiddling with how the text looks before it gets parsed.
+  Then, after I'm finished writing, I waste even more time adjusting what looks
+  good in my text editor so that it looks good in a browser or Markdown viewer.
+  
+  Being a masochist, I of course decided to create a guideline I could follow
+  which would produce decent looking output without looking stupid in vim.
+  
+  ## Basic conventions for Markdown files
+  
+  You should:
+  
+    * wrap all lines at 80 characters
+    * make **bold** text using the asterisk format: `**bold text**`
+    * make _italic_ text using the underscore format: `_emphasized text_`
+    * force a linebreak by ending a line with 2 spaces, no more
+  
+  ## Headings
+  
+  Header text must use the `atx-style` with no closing `#` character.
+  
+  Include a space between the `#` and the text of the Header.
+  
+  You shouldn’t use a header that has more than 80 characters.
+  
+  You must put a new line before and after a Header except at the beginning of a file.
+  
+  ## Lists
+  
+  When using lists, you must:
+  
+    * indent list items 2 spaces further than their parent
+    * put a newline after all lists
+    * make sure list item lines more than 80 characters should, when wrapped, align
+      vertically with the beginning of the preceding line's text
+  
+  ^Don’t put the 1st level of list items immediately after a new line.^
+  
+  
+  ## Tables
+  
+  Like fenced code blocks, tables in Markdown are provided by Markdown Extra
+  which seems to be pretty widely implemented.
+  
+  Make sure that:
+  
+    * pipe characters are preceded and followed by spaces for readability
+    * the table column width is determined by the longest cell in the column
+    * the tables are formatted so they’re readable in pre-processing
+    * the tables always be preceded and followed by newlines
+  
+  ### Table example
+  
+  A handsome table in pre-processed markdown is also handsome when rendered:
+  
+  Food                      | Kind            | Tasty?
+  ------------------------- | --------------- | ----------------
+  Bananas                   | Fruit           | Yes
+  Aubergines                | Vegetable       | No
+  Apricots                  | Fruit           | Yes
+<% end %>
