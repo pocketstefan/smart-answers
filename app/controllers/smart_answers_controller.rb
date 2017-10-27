@@ -1,7 +1,6 @@
 class SmartAnswersController < ApplicationController
   include Slimmer::GovukComponents
   include Slimmer::Headers
-  include EducationNavigationABTestable
 
   before_action :find_smart_answer, except: %w(index)
   before_action :redirect_response_to_canonical_url, only: %w{show}
@@ -12,8 +11,6 @@ class SmartAnswersController < ApplicationController
 
   helper_method(
     :breadcrumbs,
-    :should_present_new_navigation_view?,
-    :page_is_under_ab_test?,
   )
 
   rescue_from SmartAnswer::FlowRegistry::NotFound, with: :error_404
@@ -30,10 +27,6 @@ class SmartAnswersController < ApplicationController
 
     respond_to do |format|
       format.html do
-        if page_is_under_ab_test?(content_item)
-          set_education_navigation_response_header(content_item)
-        end
-
         render page_type
       end
 
@@ -131,10 +124,6 @@ private
 
   def breadcrumbs
     return {} if navigation_helpers.nil?
-    if should_present_new_navigation_view?(content_item)
-      navigation_helpers.taxon_breadcrumbs
-    else
-      navigation_helpers.breadcrumbs
-    end
+    navigation_helpers.breadcrumbs
   end
 end
