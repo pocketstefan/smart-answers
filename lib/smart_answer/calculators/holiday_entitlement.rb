@@ -64,10 +64,6 @@ module SmartAnswer::Calculators
       format_number(fraction_of_year, dp)
     end
 
-    def date_of_year(date, year)
-      date.advance(years: year - date.year)
-    end
-
     def strip_zeros(number)
       number.to_s.sub(/\.0+$/, '')
     end
@@ -95,16 +91,11 @@ module SmartAnswer::Calculators
 
     def leave_year_range
       if self.leave_year_start_date
-        needs_offset = date_calc >= date_of_year(leave_year_start_date, date_calc.year)
-        number_years = date_calc.year - (needs_offset ? 0 : 1)
-
-        SmartAnswer::YearRange.new(
-          begins_on: date_of_year(leave_year_start_date, number_years)
-        )
+        SmartAnswer::YearRange
+          .with_fixed_day_and_month(leave_year_start_date)
+          .on(date_calc)
       else
-        SmartAnswer::YearRange.new(
-          begins_on: date_calc.beginning_of_year
-        )
+        SmartAnswer::CalendarYear.on(date_calc)
       end
     end
 

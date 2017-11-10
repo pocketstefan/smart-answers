@@ -8,7 +8,7 @@ module SmartAnswer
       super(begins_on: begins_on, ends_on: ends_on)
     end
 
-    def self.with_fixed_day_and_month(date_string)
+    def self.with_fixed_day_and_month(start_date)
       year_range_class = Class.new(YearRange) do
         def self.starting_day=(day)
           @starting_day = day
@@ -45,7 +45,7 @@ module SmartAnswer
       end
 
       year_range_class.tap do |y|
-        date = Date.parse(date_string)
+        date = Date.parse(start_date.to_s)
         y.starting_month = date.month
         y.starting_day = date.day
       end
