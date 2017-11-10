@@ -61,5 +61,20 @@ module SmartAnswer
         assert_equal 366, @year_range.number_of_days
       end
     end
+
+    context 'creating ranges with fixed starting day and month' do
+      should 'not overwrite previously declared classes' do
+        Feb1Year = YearRange.with_fixed_day_and_month("1 Feb")
+        Mar15Year = YearRange.with_fixed_day_and_month("15 Mar")
+
+        feb_1_year = Feb1Year.current
+        assert_equal 1, feb_1_year.begins_on.day
+        assert_equal 2, feb_1_year.begins_on.month
+
+        mar_15_year = Mar15Year.current
+        assert_equal 15, mar_15_year.begins_on.day
+        assert_equal 3, mar_15_year.begins_on.month
+      end
+    end
   end
 end
